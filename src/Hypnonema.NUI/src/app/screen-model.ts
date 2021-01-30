@@ -8,6 +8,7 @@ export interface DuiBrowserSettings {
   soundAttenuation: number;
   soundMinDistance: number;
   soundMaxDistance: number;
+  is3DAudioEnabled: boolean;
 }
 
 export interface PositionalSettings {
@@ -39,4 +40,5 @@ export interface ScreenStatus {
   duration: number;
   currentSource: string;
   ended: boolean;
+  repeat: boolean;
 }
