@@ -65,14 +65,34 @@
             GC.SuppressFinalize(this);
         }
 
-        public void SendGetState()
+        public void GetState()
         {
             this.SendMessage(new { type = "getState" });
         }
 
-        public void SendInit(string screenName, string posterUrl)
+        public void Init(string screenName, string posterUrl, string resourceName)
         {
-            this.SendMessage(new { type = "init", screenName, posterUrl });
+            this.SendMessage(new { type = "init", screenName, posterUrl, resourceName });
+        }
+
+        public void Pause()
+        {
+            this.SendMessage(new { type = "pause" });
+        }
+
+        public void Play(string url)
+        {
+            this.SendMessage(new { type = "play", src = new { url } });
+        }
+
+        public void Resume()
+        {
+            this.SendMessage(new { type = "resume" });
+        }
+
+        public void Seek(float time)
+        {
+            this.SendMessage(new { type = "seek", time });
         }
 
         public void SendMessage(object obj)
@@ -80,32 +100,22 @@
             API.SendDuiMessage(this.NativeValue, JsonConvert.SerializeObject(obj));
         }
 
-        public void SendPause()
+        public void SetVolume(float volume)
         {
-            this.SendMessage(new { type = "pause" });
+            this.SendMessage(new { type = "volume", volume = volume / 100 });
         }
 
-        public void SendPlay(string url)
+        public void Mute(bool muted)
         {
-            this.SendMessage(new { type = "play", src = new { url } });
+            this.SendMessage(new { type = "mute", muted });
         }
 
-        public void SendResume()
-        {
-            this.SendMessage(new { type = "resume" });
-        }
-
-        public void SendSeek(float time)
-        {
-            this.SendMessage(new { type = "seek", time });
-        }
-
-        public void SendStop()
+        public void Stop()
         {
             this.SendMessage(new { type = "stop" });
         }
 
-        public void SendTick(AudioTickData tickData)
+        public void Tick(AudioTickData tickData)
         {
             this.SendMessage(
                 new
@@ -136,20 +146,19 @@
                     });
         }
 
-        public void SendToggleReplay(bool toggle)
+        public void Toggle3DAudio(bool value)
         {
-            this.SendMessage(new { type = "toggleReplay", value = toggle });
+            this.SendMessage(new { type = "toggle3DAudio", enabled = value });
         }
 
-        public void SendUpdate(bool paused, float currentTime, string currentSource)
+        public void ToggleRepeat()
         {
-            this.SendMessage(
-                new { type = "update", paused, currentTime, src = currentSource });
+            this.SendMessage(new { type = "toggleRepeat" });
         }
 
-        public void SendVolume(float volume)
+        public void Update(bool paused, float currentTime, string currentSource, bool repeat)
         {
-            this.SendMessage(new { type = "volume", volume = volume / 100 });
+            this.SendMessage(new { type = "update", paused, currentTime, src = currentSource, repeat });
         }
     }
 }
