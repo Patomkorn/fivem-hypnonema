@@ -14,7 +14,7 @@ import {
   UpdateStatuses
 } from './app-state';
 import { ScreenModel, ScreenStatus } from './screen-model';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { UpdateCheckService } from './modules/core/update-check.service';
 
 @Component({
@@ -47,6 +47,7 @@ export class AppComponent implements OnInit {
           soundAttenuation: 5,
           soundMinDistance: 3,
           soundMaxDistance: 10,
+          is3DAudioEnabled: true,
         },
         positionalSettings: null,
       };
