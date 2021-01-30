@@ -17,6 +17,8 @@
 
         float SoundMinDistance { get; set; }
 
+        void CalculateVolume();
+
         void Draw();
 
         Task OnTick();
@@ -31,8 +33,8 @@
 
         void Stop();
 
-        void SynchronizeState(bool paused, float currentTime, string currentSource);
+        void SynchronizeState(bool paused, float currentTime, string currentSource, bool repeat);
 
-        void ToggleReplay(bool replay);
+        void ToggleRepeat();
     }
 }
