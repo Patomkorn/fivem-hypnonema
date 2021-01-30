@@ -6,7 +6,7 @@ import { AppState, SetControlledScreen } from '../../app-state';
 import { Observable, Subscription, timer as ObservableTimer } from 'rxjs';
 import { ScreenStatus } from '../../screen-model';
 import { distinctUntilChanged } from 'rxjs/operators';
-import { MatSliderChange } from '@angular/material';
+import { MatSliderChange } from '@angular/material/slider';
 import { NuiService } from '../../modules/core/nui.service';
 
 @Component({
@@ -72,6 +72,15 @@ export class CurrentTrackComponent implements OnInit {
     setTimeout(() => {
       refThis.nuiService.requestDuiState(this.selectedScreenName);
     }, 500);
+  }
+
+  repeat(screenName: string) {
+    this.nuiService.repeatVideo(screenName);
+
+    const refThis = this;
+    setTimeout(() => {
+      refThis.nuiService.requestDuiState(this.selectedScreenName);
+    }, 250);
   }
 
   resumeOrPause(paused) {
